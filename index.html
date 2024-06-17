@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google-like Search Bar</title>
+</head>
+<body>
+    <div class="header">
+        <a href="https://mail.google.com" target="_blank">Gmail</a>
+        <a href="https://www.google.com/imghp" target="_blank">Images</a>
+        <a href="https://myaccount.google.com" target="_blank">
+            <img src="https://img.icons8.com/ios-glyphs/30/000000/user-male-circle.png" alt="Profile" class="profile-pic">
+        </a>
+    </div>
+    <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google Logo" class="logo">
+    <form action="https://www.google.com/search" method="GET" class="search-bar">
+        <img src="https://img.icons8.com/material-outlined/24/000000/search.png" alt="Search Icon">
+        <input type="text" name="q" placeholder="Search Google or type a URL">
+        <button type="button" id="microphone">
+            <img src="image/mic_icon.png" alt="Microphone Icon" width="50px" height="25px">
+        </button>
+        <button type="button" id="camera">
+            <img src="image/lens_icon.png" alt="Camera Icon" width="50px" height="25px">
+        </button>
+    </form>
+    <div class="shortcuts">
+        <a href="https://www.youtube.com" target="_blank">
+            <img src="https://img.icons8.com/color/48/000000/youtube-play.png" alt="YouTube Icon">
+            <span>YouTube</span>
+        </a>
+        <a href="https://www.dnaindia.com/" target="_blank">
+            <img src="https://img.icons8.com/color/48/000000/hacker-news.png" alt="Hacker News Icon">
+            <span>News</span>
+        </a>
+        <a href="https://zty.pe/" target="_blank">
+            <img src="https://img.icons8.com/color/48/000000/typewriter-with-paper.png" alt="Type to Shoot Icon">
+            <span>Type to Shoot</span>
+        </a>
+        <a href="https://www.stpcomputereducation.com/courses" target="_blank">
+            <img src="https://img.icons8.com/color/48/000000/laptop.png" alt="Online Free Courses Icon">
+            <span>Online Free Courses</span>
+        </a>
+    </div>
+
+    <script>
+        // Microphone button functionality
+        document.getElementById('microphone').addEventListener('click', () => {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ audio: true })
+                    .then(stream => {
+                        console.log('Microphone is active');
+                        // You can add code here to process the audio stream
+                    })
+                    .catch(err => {
+                        console.error('Error accessing microphone:', err);
+                    });
+            } else {
+                alert('Microphone access not supported in this browser');
+            }
+        });
+
+        // Camera button functionality
+        document.getElementById('camera').addEventListener('click', () => {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(stream => {
+                        const video = document.createElement('video');
+                        video.srcObject = stream;
+                        video.autoplay = true;
+                        video.style.width = '320px';
+                        video.style.height = '240px';
+                        document.body.appendChild(video);
+                    })
+                    .catch(err => {
+                        console.error('Error accessing camera:', err);
+                    });
+            } else {
+                alert('Camera access not supported in this browser');
+            }
+        });
+    </script>
+</body>
+</html>
